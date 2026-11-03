@@ -1,0 +1,51 @@
+{
+    "name": "workhouse-advertising/omnipay-connected-payments",
+    "description": "CBA Connected Payments gateway for Omnipay payment processing library",
+    "keywords": [
+        "cba",
+        "omnipay",
+        "connected",
+        "payments",
+        "gateway",
+        "merchant"
+    ],
+    "homepage": "https://github.com/workhouse-advertising/omnipay-connected-payments",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simon Geoghegan",
+            "email": "simon@workhouseadvertising.com.au"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Omnipay\\ConnectedPayments\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Omnipay\\ConnectedPayments\\Test\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "omnipay/common": "^3.1"
+    },
+    "require-dev": {
+        "omnipay/tests": "^3|^4",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-deprecation-rules": "^2.0"
+    },
+    "scripts": {
+        "test:static": "./vendor/bin/phpstan analyse --ansi --memory-limit=-1",
+        "test": [
+            "@test:static",
+            "phpunit"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
+    }
+}
