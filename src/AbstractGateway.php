@@ -15,9 +15,10 @@ abstract class AbstractGateway extends AbstractGatewayBase
     public function getDefaultParameters()
     {
         return [
-            'secretKey' => null,
             'userName' => null,
+            'password' => null,
             'configId' => null,
+            'sharedSecret' => null,
             'testMode' => false,
         ];
     }
