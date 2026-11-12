@@ -71,4 +71,28 @@ trait GatewayParameters
     {
         return $this->setParameter('sharedSecret', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getBaseEndpoint()
+    {
+        return $this->getTestMode() ? $this->getSandboxBaseEndpoint() : $this->getProductionBaseEndpoint();
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductionBaseEndpoint()
+    {
+        return 'https://connectedpayments.commbank.com.au';
+    }
+
+    /**
+     * @return string
+     */
+    public function getSandboxBaseEndpoint()
+    {
+        return 'https://sandbox.connectedpayments.commbank.com.au';
+    }
 }

@@ -33,7 +33,7 @@
     },
     "require-dev": {
         "omnipay/tests": "^3|^4",
-        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan": "^2.3",
         "phpstan/phpstan-deprecation-rules": "^2.0"
     },
     "scripts": {
