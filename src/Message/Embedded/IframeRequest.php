@@ -19,7 +19,7 @@ class IframeRequest extends AbstractRequest
         return [
             'configId' => $this->getConfigId(),
             'userName' => $this->getUserName(),
-            'txnType' => 1, // TODO: Check which values are supported for `txnType` and make this configurable if relevant.
+            'txnType' => $this->getTxnType(),
             'merchReference' => $this->getTransactionId(),
             // TODO: Is there no field for the currency?
             'amount' => (float) $this->getAmount(), // NOTE: dollars, not cents

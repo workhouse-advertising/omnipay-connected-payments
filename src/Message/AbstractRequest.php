@@ -11,6 +11,15 @@ abstract class AbstractRequest extends BaseAbstractRequest
 {
     use GatewayParameters;
 
+    // Defined transaction types. See https://docs.connectedpayments.cba.com.au/docs/integrations/checkout-integration/embedded-and-hosted-integration-guide
+    public const TXN_TYPE_PURCHASE = 1; // Purchase - Standard payment
+    public const TXN_TYPE_CAPTURE = 9; // Capture - Capture pre-authorized funds
+    public const TXN_TYPE_PRE_AUTH = 10; // Pre-Auth - Hold funds without charging
+    public const TXN_TYPE_REFUND = 20; // Refund - Refund against original transaction
+    public const TXN_TYPE_OPEN_REFUND = 21; // Open Refund - Refund without original transaction
+    public const TXN_TYPE_VOID = 30; // Void - Cancel transaction before settlement
+    public const TXN_TYPE_REVERSAL = 39; // Reversal - Reverse a transaction
+
     /**
      * Get the endpoint to call.
      *
@@ -31,6 +40,23 @@ abstract class AbstractRequest extends BaseAbstractRequest
      * @return string
      */
     abstract public function getResponseClass(): string;
+
+    /**
+     * @return int
+     */
+    public function getTxnType()
+    {
+        return (int) ($this->getParameter('txnType') ?? self::TXN_TYPE_PURCHASE);
+    }
+
+    /**
+     * @param mixed $value
+     * @return $this
+     */
+    public function setTxnType($value)
+    {
+        return $this->setParameter('txnType', $value);
+    }
 
     /**
      * Create a response from the response data.

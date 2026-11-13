@@ -21,9 +21,11 @@ class PurchaseRequest extends AbstractRequest
         // );
 
         return [
+            'userName' => $this->getUserName(),
+            'password' => $this->getPassword(),
             'filterCriteria' => [
                 // TODO: Confirm which fields we can use to filter for transactions.
-                'merchReference' => [
+                'merchantReference' => [
                     'operator' => 'EQ',
                     // TODO: Confirm that the transaction ID is definitely the correct field.
                     'value' => $this->getTransactionId(),
