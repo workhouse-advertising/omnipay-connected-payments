@@ -11,15 +11,25 @@ class CaptureResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        // TODO: Implement this.
-        return false;
+        $responseCode = $this->getResponseCode();
+        return $responseCode && $this->isSuccessResponseCode($responseCode);
     }
 
     /**
      * @inheritDoc
      */
-    public function isRedirect()
+    public function getResponseCode()
     {
-        return false;
+        return $this->getTransaction()['responseCode'] ?? null;
+    }
+
+    /**
+     * Get the transaction data.
+     *
+     * @return array
+     */
+    public function getTransaction(): array
+    {
+        return (array) ($this->getData() ?? []);
     }
 }

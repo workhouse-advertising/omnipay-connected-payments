@@ -11,8 +11,16 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        $responseCode = $this->getTransaction()['responseCode'] ?? null;
+        $responseCode = $this->getResponseCode();
         return $responseCode && $this->isSuccessResponseCode($responseCode);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getResponseCode()
+    {
+        return $this->getTransaction()['responseCode'] ?? null;
     }
 
     /**

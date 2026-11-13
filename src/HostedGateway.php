@@ -2,9 +2,9 @@
 
 namespace Omnipay\ConnectedPayments;
 
-use Omnipay\ConnectedPayments\AbstractGateway;
+use Omnipay\ConnectedPayments\EmbeddedGateway;
 
-class HostedGateway extends AbstractGateway
+class HostedGateway extends EmbeddedGateway
 {
     /**
      * @inheritDoc
@@ -28,15 +28,15 @@ class HostedGateway extends AbstractGateway
     }
 
     /**
-     * Handle return from off-site gateways after purchase.
+     * Get an iframe response for rendering the hosted payment form with pre-auth.
      *
      * @param array $options
-     * @return \Omnipay\ConnectedPayments\Message\Hosted\CompletePurchaseRequest
+     * @return \Omnipay\ConnectedPayments\Message\Hosted\AuthorizeRequest
      */
-    public function completePurchase(array $options = [])
+    public function authorize(array $options = [])
     {
-        $request = $this->createRequest(\Omnipay\ConnectedPayments\Message\Hosted\CompletePurchaseRequest::class, $options);
-        /** @var \Omnipay\ConnectedPayments\Message\Hosted\CompletePurchaseRequest $request */
+        $request = $this->createRequest(\Omnipay\ConnectedPayments\Message\Hosted\AuthorizeRequest::class, $options);
+        /** @var \Omnipay\ConnectedPayments\Message\Hosted\AuthorizeRequest $request */
         return $request;
     }
 }

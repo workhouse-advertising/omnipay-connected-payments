@@ -11,7 +11,6 @@ class PurchaseResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        // TODO: Implement this.
         return false;
     }
 
@@ -36,6 +35,6 @@ class PurchaseResponse extends AbstractResponse
      */
     public function getHostedUrl()
     {
-        return $this->getData()['hostedUrl'] ?? null;
+        return $this->getData()['iframeUrl'] ?? null;
     }
 }
