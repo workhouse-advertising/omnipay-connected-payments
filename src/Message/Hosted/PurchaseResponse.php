@@ -35,6 +35,14 @@ class PurchaseResponse extends AbstractResponse
      */
     public function getHostedUrl()
     {
+        return $this->getIframeUrl();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIframeUrl()
+    {
         return $this->getData()['iframeUrl'] ?? null;
     }
 }
