@@ -4,7 +4,7 @@ namespace Omnipay\ConnectedPayments\Message\Embedded;
 
 use Omnipay\ConnectedPayments\Message\AbstractResponse;
 
-class IframeResponse extends AbstractResponse
+class CaptureResponse extends AbstractResponse
 {
     /**
      * @inheritDoc
@@ -21,13 +21,5 @@ class IframeResponse extends AbstractResponse
     public function isRedirect()
     {
         return false;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIframeUrl()
-    {
-        return $this->getData()['iframeUrl'] ?? null;
     }
 }

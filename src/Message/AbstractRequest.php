@@ -41,22 +41,24 @@ abstract class AbstractRequest extends BaseAbstractRequest
      */
     abstract public function getResponseClass(): string;
 
-    /**
-     * @return int
-     */
-    public function getTxnType()
-    {
-        return (int) ($this->getParameter('txnType') ?? self::TXN_TYPE_PURCHASE);
-    }
+    // TODO: Consider if we want to support overriding `txnType`. Probably not as these are
+    //       specific to the request types themselves (authorize, purchase, etc...).
+    // /**
+    //  * @return int
+    //  */
+    // public function getTxnType()
+    // {
+    //     return (int) ($this->getParameter('txnType') ?? self::TXN_TYPE_PURCHASE);
+    // }
 
-    /**
-     * @param mixed $value
-     * @return $this
-     */
-    public function setTxnType($value)
-    {
-        return $this->setParameter('txnType', $value);
-    }
+    // /**
+    //  * @param mixed $value
+    //  * @return $this
+    //  */
+    // public function setTxnType($value)
+    // {
+    //     return $this->setParameter('txnType', $value);
+    // }
 
     /**
      * Create a response from the response data.

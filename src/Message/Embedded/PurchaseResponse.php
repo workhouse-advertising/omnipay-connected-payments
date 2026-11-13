@@ -18,9 +18,16 @@ class PurchaseResponse extends AbstractResponse
     /**
      * @inheritDoc
      */
-    public function getTransactionReference()
+    public function isRedirect()
     {
-        // TODO: Implement this.
-        return null;
+        return false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIframeUrl()
+    {
+        return $this->getData()['iframeUrl'] ?? null;
     }
 }

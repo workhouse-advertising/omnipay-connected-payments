@@ -8,30 +8,19 @@ use Omnipay\ConnectedPayments\Message\Embedded\PurchaseResponse;
 
 class PurchaseRequest extends AbstractRequest
 {
-    // TODO: Merge this with the Hosted gateway classes.
-
     /**
      * @inheritDoc
      */
     public function getData()
     {
-        // TODO: Check about validating the transaction ID.
-        // $this->validate(
-        //     'transactionId',
-        // );
-
+        // TODO: Consider validation of these fields along with the shared secret.
         return [
+            'configId' => $this->getConfigId(),
             'userName' => $this->getUserName(),
-            'password' => $this->getPassword(),
-            'filterCriteria' => [
-                // TODO: Confirm which fields we can use to filter for transactions.
-                'merchantReference' => [
-                    'operator' => 'EQ',
-                    // TODO: Confirm that the transaction ID is definitely the correct field.
-                    'value' => $this->getTransactionId(),
-                ],
-                // TODO: Should be also be filtering for any other fields?
-            ],
+            'txnType' => self::TXN_TYPE_PURCHASE,
+            'merchReference' => $this->getTransactionId(),
+            // TODO: Is there no field for the currency?
+            'amount' => (float) $this->getAmount(), // NOTE: dollars, not cents
         ];
     }
 
@@ -40,7 +29,7 @@ class PurchaseRequest extends AbstractRequest
      */
     public function getEndpoint(): string
     {
-        return sprintf('%s/merchanthub/api/v1/dynamicquery/transaction/list', $this->getBaseEndpoint());
+        return sprintf('%s/es-client-frontend/embedded', $this->getBaseEndpoint());
     }
 
     /**
@@ -48,7 +37,7 @@ class PurchaseRequest extends AbstractRequest
      */
     public function getMethod(): string
     {
-        return 'POST';
+        return 'GET';
     }
 
     /**
@@ -56,7 +45,20 @@ class PurchaseRequest extends AbstractRequest
      */
     public function getResponseClass(): string
     {
-        // TODO: Need to check against multiple transactions.
         return \Omnipay\ConnectedPayments\Message\Embedded\PurchaseResponse::class;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function sendData($data)
+    {
+        $paramString = http_build_query($data);
+        $verifyMessage = hash_hmac('sha256', $paramString, $this->getSharedSecret());
+        $iframeUrl = $this->getEndpoint() . "?{$paramString}&verifyMessage={$verifyMessage}";
+
+        return $this->makeResponse([
+            'iframeUrl' => $iframeUrl,
+        ]);
     }
 }
