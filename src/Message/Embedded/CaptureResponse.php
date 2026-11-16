@@ -24,6 +24,14 @@ class CaptureResponse extends AbstractResponse
     }
 
     /**
+     * @inheritDoc
+     */
+    public function getTransactionReference()
+    {
+        return $this->getTransaction()['txnReference'] ?? null;
+    }
+
+    /**
      * Get the transaction data.
      *
      * @return array
@@ -31,5 +39,14 @@ class CaptureResponse extends AbstractResponse
     public function getTransaction(): array
     {
         return (array) ($this->getData() ?? []);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMessage()
+    {
+        // TODO: Confirm whether or not these messages are suitable for public display.
+        return $this->getTransaction()['message'] ?? null;
     }
 }

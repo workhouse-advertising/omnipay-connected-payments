@@ -1,0 +1,130 @@
+HTTP/1.1 200 OK
+Date: Mon, 16 Nov 2026 06:29:35 GMT
+Content-Type: application/json
+Content-Length: 3555
+Connection: keep-alive
+vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+pragma: no-cache
+expires: 0
+x-content-type-options: nosniff
+strict-transport-security: max-age=15552000; includeSubDomains
+x-frame-options: DENY
+x-xss-protection: 0
+referrer-policy: no-referrer
+cf-cache-status: DYNAMIC
+Access-Control-Allow-Origin: *
+Access-Control-Expose-Headers: X-Authentication-Token, x-sms-validation-attempt
+Access-Control-Allow-Headers: authorization, content-type, x-authentication-token, x-sms-validation-attempt
+Access-Control-Allow-Methods: *
+Server: cloudflare
+CF-RAY: a5b4712f4e3d04b2-PER
+
+{
+  "resultCode" : "00",
+  "message" : "Success",
+  "requestId" : "b6f709bc-94335",
+  "dynamicQuery" : {
+    "queryId" : "01M7HGQYKHN782EN0SP2A4GB51",
+    "userName" : "tester.api-user.demo",
+    "startEventTime" : 1794787200000,
+    "endEventTime" : 1794810575480,
+    "filterCriteria" : {
+      "merchantReference" : {
+        "operator" : "EQ",
+        "value" : "2c959214-346c-4dd7-a5d5-e0d7fabb76f2"
+      },
+      "hierarchy" : {
+        "operator" : "BEGINS_WITH",
+        "value" : "Tester|Sandbox"
+      }
+    },
+    "numberOfPages" : 1,
+    "count" : 1,
+    "items" : [ {
+      "transactionId" : "1794810016qX4X2",
+      "customerId" : "Tester",
+      "gatewayType" : "IPSI_MOCK",
+      "gatewayRoute" : "IPSI_MOCK",
+      "gwMerchantId" : "2c959214-346c-4dd7-a5d5-e0d7fabb76f2",
+      "txnType" : 10,
+      "txnDateTime" : "2026-11-16T06:20:16Z",
+      "responseCode" : "900",
+      "amount" : 309900,
+      "beenVoided" : false,
+      "errors" : [ "Success" ],
+      "cardToken" : "404137QNsGIn6459",
+      "hierarchy" : "Tester|Sandbox",
+      "maskedPan" : "404137XXXXXX6459",
+      "userName" : "tester.api-user.demo",
+      "metadata" : {
+        "browser" : "Chrome",
+        "browser_version" : "Chrome 157",
+        "configId" : "e5cd404c-76a1-44ef-9456-a84bfcacaada",
+        "country" : "AU",
+        "deviceId" : "13d9b456c52adc082bb0f338242c161c0d37408865c24b499cef1c7cbf610945",
+        "device_model" : "Linux Desktop",
+        "device_type" : "Desktop",
+        "device_vendor" : "Unknown",
+        "email" : "undefined",
+        "engine" : "Blink",
+        "engine_version" : "157",
+        "os" : "Linux",
+        "os_version" : "??",
+        "os_version_name" : "Linux ??",
+        "requestorIp" : "172.68.86.148",
+        "test" : "test",
+        "timezone" : "Australia/Perth"
+      },
+      "merchantReference" : "2c959214-346c-4dd7-a5d5-e0d7fabb76f2",
+      "ecm" : "31",
+      "cardSchema" : "VISA",
+      "instrumentType" : [ "VISA", "EFTPOS" ],
+      "cardCategory" : "DEBIT",
+      "cardSubcategory" : "CLASSIC",
+      "currency" : "AUD",
+      "cardHolderName" : "Test Tester",
+      "transactionStatus" : "DECLINE",
+      "cardExpiryDate" : "12/30",
+      "additionalData" : { },
+      "paymentInstrumentType" : "PAN",
+      "paymentInstrumentSubType" : "CARD",
+      "gatewaySettingId" : "fc773ac7-768f-4415-a273-3ed6d69fc942",
+      "requestId" : "a987bb6a-14421",
+      "cardIssuer" : "GREATER BANK - A DIVISION OF NEWCASTLE",
+      "cardIssuerCountry" : "AUSTRALIA",
+      "channel" : "iframe",
+      "cardTokenType" : "PAN",
+      "processorId" : "IPSI",
+      "eventTime" : 1794810016767,
+      "autoVoidAction" : "NOT_REQUIRED",
+      "threeDsCheckStatus" : "NOT_CHECKED",
+      "serviceEvents" : [ {
+        "source" : "es-payments-router",
+        "startTime" : 1794810016809,
+        "endTime" : 1794810016907,
+        "type" : "IPSI",
+        "entity" : "TRANSACTION",
+        "operation" : "PURCHASE"
+      }, {
+        "source" : "es-banksim",
+        "startTime" : 1794810016872,
+        "endTime" : 1794810016900,
+        "type" : "IPSI",
+        "entity" : "TRANSACTION",
+        "operation" : "PURCHASE"
+      }, {
+        "source" : "PaymentsHub",
+        "startTime" : 1794810016767,
+        "endTime" : 1794810017039,
+        "type" : "IPSI",
+        "entity" : "TRANSACTION",
+        "operation" : "PURCHASE"
+      } ],
+      "startRequest" : 1794810016767,
+      "endRequest" : 1794810017039,
+      "requestTiming" : 272,
+      "thirdPartyRequestTiming" : { }
+    } ]
+  }
+}

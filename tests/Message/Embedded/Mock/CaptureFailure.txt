@@ -1,0 +1,35 @@
+HTTP/1.1 400 Bad Request
+Date: Mon, 16 Nov 2026 06:39:35 GMT
+Content-Type: application/json
+Content-Length: 234
+Connection: keep-alive
+vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+pragma: no-cache
+expires: 0
+x-content-type-options: nosniff
+strict-transport-security: max-age=15552000; includeSubDomains
+x-frame-options: DENY
+x-xss-protection: 0
+referrer-policy: no-referrer
+cf-cache-status: DYNAMIC
+Access-Control-Allow-Origin: *
+Access-Control-Expose-Headers: X-Authentication-Token, x-sms-validation-attempt
+Access-Control-Allow-Headers: authorization, content-type, x-authentication-token, x-sms-validation-attempt
+Access-Control-Allow-Methods: *
+Server: cloudflare
+CF-RAY: a5b47fd28b5f8658-PER
+
+{
+    "responseCode": "713",
+    "message": "The transaction request is invalid and cannot be processed",
+    "errors": [
+        {
+            "error": "Invalid Characters present",
+            "field": "txnId",
+            "rejectedValue": "BEANS"
+        }
+    ],
+    "requestId": "a987bb6a-14702",
+    "cardTokenType": "PAN"
+}

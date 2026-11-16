@@ -1,0 +1,58 @@
+HTTP/1.1 200 OK
+Date: Mon, 16 Nov 2026 06:35:19 GMT
+Content-Type: application/json
+Content-Length: 869
+Connection: keep-alive
+vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+pragma: no-cache
+expires: 0
+x-content-type-options: nosniff
+strict-transport-security: max-age=15552000; includeSubDomains
+x-frame-options: DENY
+x-xss-protection: 0
+referrer-policy: no-referrer
+cf-cache-status: DYNAMIC
+Access-Control-Allow-Origin: *
+Access-Control-Expose-Headers: X-Authentication-Token, x-sms-validation-attempt
+Access-Control-Allow-Headers: authorization, content-type, x-authentication-token, x-sms-validation-attempt
+Access-Control-Allow-Methods: *
+Server: cloudflare
+CF-RAY: a5b4799219cf6e81-PER
+
+{
+    "responseCode": "00",
+    "message": "Approved",
+    "requestId": "a987bb6a-14644",
+    "txnType": 9,
+    "customerId": "Tester",
+    "pspSelected": "IPSI_MOCK",
+    "gatewaySettingId": "fc773ac7-768f-4415-a273-3ed6d69fc942",
+    "merchReference": "2c959214-346c-4dd7-a5d5-e0d7fabb76f2",
+    "metadata": {},
+    "additionalData": {
+        "initialTransactionId": "1794810916W5cQb"
+    },
+    "transactionDate": "2026-11-16T06:35:19Z",
+    "receiptNumber": "mockConnector",
+    "settlementDate": "2026-11-16T18:00:00Z",
+    "maskedPAN": "411111XXXXXX1111",
+    "amount": 309900,
+    "cardHolderName": "Test Tester",
+    "cardExpiryDate": "03/30",
+    "cardSchema": "VISA",
+    "instrumentType": [
+        "VISA"
+    ],
+    "cardCategory": "DEBIT",
+    "currency": "AUD",
+    "txnReference": "1794810919Wc4bV",
+    "ecm": "31",
+    "gwTransactionId": "1794810916W5cQb",
+    "cardIssuer": "CONOTOXIA SP. Z O.O",
+    "cardIssuerCountry": "POLAND",
+    "channel": "api",
+    "cardTokenType": "PAN",
+    "gatewayRoute": "IPSI_MOCK",
+    "paymentInstrumentType": "PAN"
+}

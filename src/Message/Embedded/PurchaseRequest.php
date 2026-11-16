@@ -15,6 +15,7 @@ class PurchaseRequest extends AbstractRequest
     {
         $this->validate(
             'currency',
+            'sharedSecret',
             'transactionId',
         );
 
