@@ -13,14 +13,18 @@ class PurchaseRequest extends AbstractRequest
      */
     public function getData()
     {
-        // TODO: Consider validation of these fields along with the shared secret.
+        $this->validate(
+            'currency',
+            'transactionId',
+        );
+
         return [
             'configId' => $this->getConfigId(),
             'userName' => $this->getUserName(),
             'txnType' => self::TXN_TYPE_PURCHASE,
             'merchReference' => $this->getTransactionId(),
-            // TODO: Is there no field for the currency?
-            'amount' => (float) $this->getAmount(), // NOTE: dollars, not cents
+            'amount' => $this->getAmount(), // NOTE: dollars, not cents
+            'currency' => $this->getCurrency(),
         ];
     }
 

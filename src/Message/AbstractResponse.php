@@ -24,7 +24,8 @@ abstract class AbstractResponse extends BaseAbstractResponse implements Redirect
      */
     public function isSuccessResponseCode(string $code): bool
     {
-        return in_array($code, self::RESPONSE_CODES_SUCCESS);
+        // TODO: Consider adding checks for partial payments too.
+        return in_array($code, self::RESPONSE_CODES_SUCCESS, true);
     }
 
     /**
@@ -35,7 +36,7 @@ abstract class AbstractResponse extends BaseAbstractResponse implements Redirect
      */
     public function isRetryResponseCode(string $code): bool
     {
-        return in_array($code, self::RESPONSE_CODES_RETRY);
+        return in_array($code, self::RESPONSE_CODES_RETRY, true);
     }
 
     /**
@@ -46,7 +47,7 @@ abstract class AbstractResponse extends BaseAbstractResponse implements Redirect
      */
     public function isCustomerActionResponseCode(string $code): bool
     {
-        return in_array($code, self::RESPONSE_CODES_CUSTOMER_ACTION);
+        return in_array($code, self::RESPONSE_CODES_CUSTOMER_ACTION, true);
     }
 
     /**
@@ -57,6 +58,6 @@ abstract class AbstractResponse extends BaseAbstractResponse implements Redirect
      */
     public function isFraudResponseCode(string $code): bool
     {
-        return in_array($code, self::RESPONSE_CODES_FRAUD);
+        return in_array($code, self::RESPONSE_CODES_FRAUD, true);
     }
 }
