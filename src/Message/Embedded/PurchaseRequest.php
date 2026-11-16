@@ -14,6 +14,7 @@ class PurchaseRequest extends AbstractRequest
     public function getData()
     {
         $this->validate(
+            'amount',
             'currency',
             'sharedSecret',
             'transactionId',

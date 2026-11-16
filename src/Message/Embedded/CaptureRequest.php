@@ -13,6 +13,7 @@ class CaptureRequest extends AbstractRequest
     public function getData()
     {
         $this->validate(
+            'amount',
             'currency',
             'transactionId',
             'transactionReference',
