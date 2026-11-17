@@ -17,6 +17,8 @@ class CaptureRequest extends AbstractRequest
             'currency',
             'transactionId',
             'transactionReference',
+            'userName',
+            'password',
         );
 
         return [

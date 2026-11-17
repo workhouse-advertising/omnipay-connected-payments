@@ -41,25 +41,6 @@ abstract class AbstractRequest extends BaseAbstractRequest
      */
     abstract public function getResponseClass(): string;
 
-    // TODO: Consider if we want to support overriding `txnType`. Probably not as these are
-    //       specific to the request types themselves (authorize, purchase, etc...).
-    // /**
-    //  * @return int
-    //  */
-    // public function getTxnType()
-    // {
-    //     return (int) ($this->getParameter('txnType') ?? self::TXN_TYPE_PURCHASE);
-    // }
-
-    // /**
-    //  * @param mixed $value
-    //  * @return $this
-    //  */
-    // public function setTxnType($value)
-    // {
-    //     return $this->setParameter('txnType', $value);
-    // }
-
     /**
      * Create a response from the response data.
      *
@@ -78,14 +59,10 @@ abstract class AbstractRequest extends BaseAbstractRequest
      */
     protected function getAuthenticationHeaders(): array
     {
-        // TODO: Implement authentication.
-        // // NOTE: Prioritising the API key if one is set.
-        // $header = $this->getApiKey() ? 'x-user-secret-key' : 'x-access-token';
-        // $value = $this->getApiKey() ?: $this->getAccessToken();
-
-        return [
-            // $header => $value,
-        ];
+        // NOTE: Currently requiring userName/password authentication as other
+        //       supported authentication methods are not currently suitable for
+        //       reliable server-side communication.
+        return [];
     }
 
     /**

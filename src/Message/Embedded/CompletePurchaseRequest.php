@@ -13,6 +13,8 @@ class CompletePurchaseRequest extends AbstractRequest
     {
         $this->validate(
             'transactionId',
+            'userName',
+            'password',
         );
 
         return [

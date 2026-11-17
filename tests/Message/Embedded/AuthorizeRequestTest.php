@@ -55,13 +55,14 @@ class AuthorizeRequestTest extends AbstractMessageTestCase
      */
     public function testSendSuccess()
     {
-        /** @var \Omnipay\Common\Message\AbstractResponse $response */
+        /** @var \Omnipay\ConnectedPayments\Message\Embedded\AuthorizeResponse $response */
         $response = $this->request->send();
         $this->assertFalse($response->isPending());
         $this->assertFalse($response->isSuccessful());
         $this->assertTrue($response->isRedirect());
         $expected = 'https://connectedpayments.commbank.com.au/es-client-frontend/embedded?';
         $this->assertTrue(str_starts_with($response->getRedirectUrl(), $expected), "Redirect URL '{$response->getRedirectUrl()}' does not start with '{$expected}'");
+        $this->assertTrue(str_starts_with($response->getRedirectHtml(), '<iframe '), "Redirect HTML does not appear to be an iframe.");
     }
 
     /**

@@ -18,6 +18,8 @@ class PurchaseRequest extends AbstractRequest
             'currency',
             'sharedSecret',
             'transactionId',
+            'configId',
+            'userName',
         );
 
         return [

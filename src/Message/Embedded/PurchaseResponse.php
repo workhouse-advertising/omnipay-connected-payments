@@ -8,6 +8,21 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 class PurchaseResponse extends AbstractResponse
 {
     /**
+     * @var string
+     */
+    protected string $iframeId = 'connectedpayments-iframe';
+
+    /**
+     * @var string
+     */
+    protected string $iframeWidth = '100%';
+
+    /**
+     * @var string
+     */
+    protected string $iframeHeight = '600px';
+
+    /**
      * @inheritDoc
      */
     public function isSuccessful()
@@ -41,15 +56,68 @@ class PurchaseResponse extends AbstractResponse
     }
 
     /**
+     * @return string
+     */
+    public function getIframeId(): string
+    {
+        return $this->iframeId;
+    }
+
+    /**
+     * @param string $iframeId
+     * @return static
+     */
+    public function setIframeId(string $iframeId): static
+    {
+        $this->iframeId = $iframeId;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIframeWidth(): string
+    {
+        return $this->iframeWidth;
+    }
+
+    /**
+     * @param string $iframeWidth
+     * @return static
+     */
+    public function setIframeWidth(string $iframeWidth): static
+    {
+        $this->iframeWidth = $iframeWidth;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIframeHeight(): string
+    {
+        return $this->iframeHeight;
+    }
+
+    /**
+     * @param string $iframeHeight
+     * @return static
+     */
+    public function setIframeHeight(string $iframeHeight): static
+    {
+        $this->iframeHeight = $iframeHeight;
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function getRedirectHtml()
     {
-        // TODO: Make width/height/id and other attributes configurable.
-        $id = 'connectedpayments-iframe';
         $iframeUrl = $this->getRedirectUrl() ?? '';
-        $height = '600px';
-        $width = '100%';
+        $id = htmlspecialchars($this->getIframeId());
+        $width = htmlspecialchars($this->getIframeWidth());
+        $height = htmlspecialchars($this->getIframeHeight());
         return sprintf('<iframe id="%s" src="%s" width="%s" height="%s" frameborder="0" allow="payment"></iframe>', $id, $iframeUrl, $width, $height);
     }
 
