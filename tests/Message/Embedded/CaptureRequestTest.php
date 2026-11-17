@@ -88,7 +88,7 @@ class CaptureRequestTest extends AbstractMessageTestCase
             'dynamicDescriptor' => $dynamicDescriptor,
             'allowArbitraryCapture' => $allowArbitraryCapture,
             'metadata' => $metadata,
-            'requestorIp' => '127.0.0.1',
+            'requestorIp' => $clientIp,
         ];
 
         $this->assertEquals($expected, $this->request->getData());
