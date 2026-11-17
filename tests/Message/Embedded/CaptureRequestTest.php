@@ -54,6 +54,46 @@ class CaptureRequestTest extends AbstractMessageTestCase
     }
 
     /**
+     * Test the `getData()` method when optional fields have been supplied.
+     */
+    public function testGetDataWithOptionalFields()
+    {
+        $channel = 'Channel fun';
+        $gatewaySettingId = 'ABC123';
+        $dynamicDescriptor = 'DEF456';
+        $allowArbitraryCapture = true;
+        $metadata = [
+            'beans' => 'OKAY',
+            'metadata.bunns' => 'FUNN',
+            'goose' => 'HAPPY',
+        ];
+        $this->request->setChannel($channel);
+        $this->request->setGatewaySettingId($gatewaySettingId);
+        $this->request->setDynamicDescriptor($dynamicDescriptor);
+        $this->request->setAllowArbitraryCapture($allowArbitraryCapture);
+        $this->request->setMetadata($metadata);
+
+        $expected = [
+            'userName' => $this->request->getUserName(),
+            'password' => $this->request->getPassword(),
+            'amount' => $this->request->getAmountInteger(),
+            'currency' => $this->request->getCurrency(),
+            'merchReference' => $this->request->getTransactionId(),
+            'txnId' => $this->request->getTransactionReference(),
+            'txnType' => \Omnipay\ConnectedPayments\Message\AbstractRequest::TXN_TYPE_CAPTURE,
+            'channel' => $channel,
+            'gatewaySettingId' => $gatewaySettingId,
+            'dynamicDescriptor' => $dynamicDescriptor,
+            'allowArbitraryCapture' => $allowArbitraryCapture,
+            'metadata.beans' => $metadata['beans'],
+            'metadata.bunns' => $metadata['metadata.bunns'],
+            'metadata.goose' => $metadata['goose'],
+        ];
+
+        $this->assertEquals($expected, $this->request->getData());
+    }
+
+    /**
      * Test a successful request.
      */
     public function testSendSuccess()
