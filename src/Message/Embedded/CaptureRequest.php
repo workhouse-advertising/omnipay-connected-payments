@@ -42,7 +42,6 @@ class CaptureRequest extends AbstractRequest
             'channel' => $this->getChannel(),
             'gatewaySettingId' => $this->getGatewaySettingId(),
             'dynamicDescriptor' => $this->getDynamicDescriptor(),
-            // TODO: Confirm the `allowArbitraryCapture` parameter accepts `0` and `1` as `http_build_query()` would send them.
             'allowArbitraryCapture' => $this->getAllowArbitraryCapture(),
         ], fn ($item) => (!is_null($item) && $item !== ''));
 
