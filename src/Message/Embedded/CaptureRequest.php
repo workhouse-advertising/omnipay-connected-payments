@@ -4,11 +4,11 @@ namespace Omnipay\ConnectedPayments\Message\Embedded;
 
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\ConnectedPayments\Message\AbstractRequest;
-use Omnipay\ConnectedPayments\Traits\RequestParameters;
+use Omnipay\ConnectedPayments\Traits\CaptureRequestParameters;
 
 class CaptureRequest extends AbstractRequest
 {
-    use RequestParameters;
+    use CaptureRequestParameters;
 
     /**
      * @inheritDoc
@@ -40,15 +40,14 @@ class CaptureRequest extends AbstractRequest
         // Filter optional data.
         $optionalData = array_filter([
             'channel' => $this->getChannel(),
+            'requestorIp' => $this->getClientIp(),
             'gatewaySettingId' => $this->getGatewaySettingId(),
             'dynamicDescriptor' => $this->getDynamicDescriptor(),
             'allowArbitraryCapture' => $this->getAllowArbitraryCapture(),
+            'metadata' => empty($this->getMetadata()) ? null : $this->getMetadata(),
         ], fn ($item) => (!is_null($item) && $item !== ''));
 
-        // Add metadata.
-        $metadata = $this->getMetadata();
-
-        return array_merge($data, $optionalData, $metadata);
+        return array_merge($data, $optionalData);
     }
 
     /**

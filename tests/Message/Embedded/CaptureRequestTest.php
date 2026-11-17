@@ -58,15 +58,17 @@ class CaptureRequestTest extends AbstractMessageTestCase
      */
     public function testGetDataWithOptionalFields()
     {
+        $clientIp = '127.0.0.1';
         $channel = 'Channel fun';
         $gatewaySettingId = 'ABC123';
         $dynamicDescriptor = 'DEF456';
         $allowArbitraryCapture = true;
         $metadata = [
             'beans' => 'OKAY',
-            'metadata.bunns' => 'FUNN',
+            'bunns' => 'FUNN',
             'goose' => 'HAPPY',
         ];
+        $this->request->setClientIp($clientIp);
         $this->request->setChannel($channel);
         $this->request->setGatewaySettingId($gatewaySettingId);
         $this->request->setDynamicDescriptor($dynamicDescriptor);
@@ -85,9 +87,8 @@ class CaptureRequestTest extends AbstractMessageTestCase
             'gatewaySettingId' => $gatewaySettingId,
             'dynamicDescriptor' => $dynamicDescriptor,
             'allowArbitraryCapture' => $allowArbitraryCapture,
-            'metadata.beans' => $metadata['beans'],
-            'metadata.bunns' => $metadata['metadata.bunns'],
-            'metadata.goose' => $metadata['goose'],
+            'metadata' => $metadata,
+            'requestorIp' => '127.0.0.1',
         ];
 
         $this->assertEquals($expected, $this->request->getData());

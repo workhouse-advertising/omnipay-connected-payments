@@ -2,7 +2,7 @@
 
 namespace Omnipay\ConnectedPayments\Traits;
 
-trait RequestParameters
+trait PurchaseRequestParameters
 {
     /**
      * @return mixed
@@ -75,58 +75,6 @@ trait RequestParameters
     }
 
     /**
-     * @return bool|null
-     */
-    public function getAllowArbitraryCapture()
-    {
-        $value = $this->getParameter('allowArbitraryCapture');
-        return is_null($value) ? $value : (bool) $value;
-    }
-
-    /**
-     * @param bool|null $value
-     * @return $this
-     */
-    public function setAllowArbitraryCapture($value)
-    {
-        return $this->setParameter('allowArbitraryCapture', $value);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGatewaySettingId()
-    {
-        return $this->getParameter('gatewaySettingId');
-    }
-
-    /**
-     * @param mixed $value
-     * @return $this
-     */
-    public function setGatewaySettingId($value)
-    {
-        return $this->setParameter('gatewaySettingId', $value);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDynamicDescriptor()
-    {
-        return $this->getParameter('dynamicDescriptor');
-    }
-
-    /**
-     * @param mixed $value
-     * @return $this
-     */
-    public function setDynamicDescriptor($value)
-    {
-        return $this->setParameter('dynamicDescriptor', $value);
-    }
-
-    /**
      * @param mixed $value
      * @return $this
      */
@@ -135,7 +83,7 @@ trait RequestParameters
         $metadata = [];
 
         // TODO: Consider an `is_iterable($value)` check or if we should just allow errors to be thrown.
-        foreach ($value as $key => $metadataValue) {
+        foreach (($value ?? []) as $key => $metadataValue) {
             $key = preg_replace("/^metadata\./", '', $key);
             $metadata[$key] = $metadataValue;
         }
