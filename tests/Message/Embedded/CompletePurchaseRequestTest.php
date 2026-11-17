@@ -60,8 +60,9 @@ class CompletePurchaseRequestTest extends AbstractMessageTestCase
     {
         $this->setMockHttpResponse('CompletePurchaseSuccess.txt');
 
+        /** @var \Omnipay\Common\Message\AbstractResponse $response */
         $response = $this->request->send();
-        // $this->assertFalse($response->isPending());
+        $this->assertFalse($response->isPending());
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
         $this->assertEquals('1794810916W5cQb', $response->getTransactionReference());
@@ -74,8 +75,9 @@ class CompletePurchaseRequestTest extends AbstractMessageTestCase
     {
         $this->setMockHttpResponse('CompletePurchaseFailure.txt');
 
+        /** @var \Omnipay\Common\Message\AbstractResponse $response */
         $response = $this->request->send();
-        // $this->assertFalse($response->isPending());
+        $this->assertFalse($response->isPending());
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
         // TODO: Consider filling in messages from error response codes.

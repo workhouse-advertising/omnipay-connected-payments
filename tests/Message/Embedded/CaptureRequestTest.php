@@ -60,8 +60,9 @@ class CaptureRequestTest extends AbstractMessageTestCase
     {
         $this->setMockHttpResponse('CaptureSuccess.txt');
 
+        /** @var \Omnipay\Common\Message\AbstractResponse $response */
         $response = $this->request->send();
-        // $this->assertFalse($response->isPending());
+        $this->assertFalse($response->isPending());
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
         $this->assertEquals('1794810919Wc4bV', $response->getTransactionReference());
@@ -74,8 +75,9 @@ class CaptureRequestTest extends AbstractMessageTestCase
     {
         $this->setMockHttpResponse('CaptureFailure.txt');
 
+        /** @var \Omnipay\Common\Message\AbstractResponse $response */
         $response = $this->request->send();
-        // $this->assertFalse($response->isPending());
+        $this->assertFalse($response->isPending());
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
         $this->assertSame('The transaction request is invalid and cannot be processed', $response->getMessage());

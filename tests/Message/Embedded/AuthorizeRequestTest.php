@@ -55,10 +55,13 @@ class AuthorizeRequestTest extends AbstractMessageTestCase
      */
     public function testSendSuccess()
     {
+        /** @var \Omnipay\Common\Message\AbstractResponse $response */
         $response = $this->request->send();
-        // $this->assertFalse($response->isPending());
+        $this->assertFalse($response->isPending());
         $this->assertFalse($response->isSuccessful());
         $this->assertTrue($response->isRedirect());
+        $expected = 'https://connectedpayments.commbank.com.au/es-client-frontend/embedded?';
+        $this->assertTrue(str_starts_with($response->getRedirectUrl(), $expected), "Redirect URL '{$response->getRedirectUrl()}' does not start with '{$expected}'");
     }
 
     /**
@@ -69,8 +72,5 @@ class AuthorizeRequestTest extends AbstractMessageTestCase
         $this->expectException(\Omnipay\Common\Exception\InvalidRequestException::class);
         $this->request->setTransactionId(null); // @phpstan-ignore argument.type
         $response = $this->request->send();
-        // $this->assertFalse($response->isPending());
-        $this->assertFalse($response->isSuccessful());
-        $this->assertTrue($response->isRedirect());
     }
 }

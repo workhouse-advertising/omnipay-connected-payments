@@ -24,6 +24,15 @@ class PurchaseResponse extends AbstractResponse
     }
 
     /**
+     * @inheritDoc
+     * @return string|null
+     */
+    public function getRedirectUrl()
+    {
+        return $this->getIframeUrl();
+    }
+
+    /**
      * @return mixed
      */
     public function getIframeUrl()
@@ -38,7 +47,7 @@ class PurchaseResponse extends AbstractResponse
     {
         // TODO: Make width/height/id and other attributes configurable.
         $id = 'connectedpayments-iframe';
-        $iframeUrl = $this->getIframeUrl() ?? '';
+        $iframeUrl = $this->getRedirectUrl() ?? '';
         $height = '600px';
         $width = '100%';
         return sprintf('<iframe id="%s" src="%s" width="%s" height="%s" frameborder="0" allow="payment"></iframe>', $id, $iframeUrl, $width, $height);
@@ -49,7 +58,7 @@ class PurchaseResponse extends AbstractResponse
      */
     public function getRedirectResponse()
     {
-        // $this->validateRedirect();
+        $this->validateRedirect();
         return new HttpResponse($this->getRedirectHtml());
     }
 }
