@@ -47,6 +47,66 @@ class PurchaseRequestTest extends AbstractMessageTestCase
             'merchReference' => $this->request->getTransactionId(),
             'amount' => $this->request->getAmount(),
             'currency' => $this->request->getCurrency(),
+            'email' => $this->request->getCard()->getEmail(),
+        ];
+
+        $this->assertEquals($expected, $this->request->getData());
+    }
+
+    /**
+     * Test the `getData()` method where no card is set.
+     */
+    public function testGetDataWithoutCard()
+    {
+        $this->request->setCard(null); // @phpstan-ignore argument.type
+
+        $expected = [
+            'configId' => $this->request->getConfigId(),
+            'userName' => $this->request->getUserName(),
+            'txnType' => \Omnipay\ConnectedPayments\Message\AbstractRequest::TXN_TYPE_PURCHASE,
+            'merchReference' => $this->request->getTransactionId(),
+            'amount' => $this->request->getAmount(),
+            'currency' => $this->request->getCurrency(),
+        ];
+
+        $this->assertEquals($expected, $this->request->getData());
+    }
+
+    /**
+     * Test the `getData()` method when optional fields have been supplied.
+     */
+    public function testGetDataWithOptionalFields()
+    {
+        $channel = 'Channel fun';
+        $cardToken = 'ABC123';
+        $tokenControlToken = true;
+        $onlyTokenise = false;
+        $metadata = [
+            'beans' => 'OKAY',
+            'metadata.bunns' => 'FUNN',
+            'goose' => 'HAPPY',
+        ];
+        $this->request->setChannel($channel);
+        $this->request->setCardToken($cardToken);
+        $this->request->setTokenControlToken($tokenControlToken);
+        $this->request->setOnlyTokenise($onlyTokenise);
+        $this->request->setMetadata($metadata);
+
+        $expected = [
+            'configId' => $this->request->getConfigId(),
+            'userName' => $this->request->getUserName(),
+            'txnType' => \Omnipay\ConnectedPayments\Message\AbstractRequest::TXN_TYPE_PURCHASE,
+            'merchReference' => $this->request->getTransactionId(),
+            'amount' => $this->request->getAmount(),
+            'currency' => $this->request->getCurrency(),
+            'email' => $this->request->getCard()->getEmail(),
+            'channel' => $channel,
+            'cardToken' => $cardToken,
+            'tokenControl.token' => $tokenControlToken,
+            'onlyTokenise' => $onlyTokenise,
+            'metadata.beans' => $metadata['beans'],
+            'metadata.bunns' => $metadata['metadata.bunns'],
+            'metadata.goose' => $metadata['goose'],
         ];
 
         $this->assertEquals($expected, $this->request->getData());

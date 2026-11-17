@@ -5,9 +5,12 @@ namespace Omnipay\ConnectedPayments\Message\Embedded;
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\ConnectedPayments\Message\AbstractRequest;
 use Omnipay\ConnectedPayments\Message\Embedded\PurchaseResponse;
+use Omnipay\ConnectedPayments\Traits\PurchaseRequestParameters;
 
 class PurchaseRequest extends AbstractRequest
 {
+    use PurchaseRequestParameters;
+
     /**
      * @inheritDoc
      */
@@ -15,14 +18,15 @@ class PurchaseRequest extends AbstractRequest
     {
         $this->validate(
             'amount',
-            'currency',
+            'currency', // TODO: Consider not validating `currency` as it's not actually required.
             'sharedSecret',
             'transactionId',
             'configId',
             'userName',
         );
 
-        return [
+        // Start with the required data.
+        $data = [
             'configId' => $this->getConfigId(),
             'userName' => $this->getUserName(),
             'txnType' => self::TXN_TYPE_PURCHASE,
@@ -30,6 +34,21 @@ class PurchaseRequest extends AbstractRequest
             'amount' => $this->getAmount(), // NOTE: dollars, not cents
             'currency' => $this->getCurrency(),
         ];
+
+        // Filter optional data.
+        $optionalData = array_filter([
+            'email' => $this->getCard()?->getEmail(), // @phpstan-ignore nullsafe.neverNull
+            'channel' => $this->getChannel(),
+            'cardToken' => $this->getCardToken(),
+            // TODO: Confirm the `tokenControl.token` and `onlyTokenise` parameters accept `0` and `1` as `http_build_query()` would send them.
+            'tokenControl.token' => $this->getTokenControlToken(),
+            'onlyTokenise' => $this->getOnlyTokenise(),
+        ], fn ($item) => (!is_null($item) && $item !== ''));
+
+        // Add metadata.
+        $metadata = $this->getMetadata();
+
+        return array_merge($data, $optionalData, $metadata);
     }
 
     /**
