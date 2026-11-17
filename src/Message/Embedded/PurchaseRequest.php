@@ -5,11 +5,11 @@ namespace Omnipay\ConnectedPayments\Message\Embedded;
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\ConnectedPayments\Message\AbstractRequest;
 use Omnipay\ConnectedPayments\Message\Embedded\PurchaseResponse;
-use Omnipay\ConnectedPayments\Traits\PurchaseRequestParameters;
+use Omnipay\ConnectedPayments\Traits\RequestParameters;
 
 class PurchaseRequest extends AbstractRequest
 {
-    use PurchaseRequestParameters;
+    use RequestParameters;
 
     /**
      * @inheritDoc

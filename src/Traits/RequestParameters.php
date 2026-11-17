@@ -2,7 +2,7 @@
 
 namespace Omnipay\ConnectedPayments\Traits;
 
-trait PurchaseRequestParameters
+trait RequestParameters
 {
     /**
      * @return mixed
@@ -72,6 +72,58 @@ trait PurchaseRequestParameters
     public function setOnlyTokenise($value)
     {
         return $this->setParameter('onlyTokenise', $value);
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getAllowArbitraryCapture()
+    {
+        $value = $this->getParameter('allowArbitraryCapture');
+        return is_null($value) ? $value : (bool) $value;
+    }
+
+    /**
+     * @param bool|null $value
+     * @return $this
+     */
+    public function setAllowArbitraryCapture($value)
+    {
+        return $this->setParameter('allowArbitraryCapture', $value);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGatewaySettingId()
+    {
+        return $this->getParameter('gatewaySettingId');
+    }
+
+    /**
+     * @param mixed $value
+     * @return $this
+     */
+    public function setGatewaySettingId($value)
+    {
+        return $this->setParameter('gatewaySettingId', $value);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDynamicDescriptor()
+    {
+        return $this->getParameter('dynamicDescriptor');
+    }
+
+    /**
+     * @param mixed $value
+     * @return $this
+     */
+    public function setDynamicDescriptor($value)
+    {
+        return $this->setParameter('dynamicDescriptor', $value);
     }
 
     /**

@@ -4,9 +4,12 @@ namespace Omnipay\ConnectedPayments\Message\Embedded;
 
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\ConnectedPayments\Message\AbstractRequest;
+use Omnipay\ConnectedPayments\Traits\RequestParameters;
 
 class CaptureRequest extends AbstractRequest
 {
+    use RequestParameters;
+
     /**
      * @inheritDoc
      */
@@ -21,7 +24,8 @@ class CaptureRequest extends AbstractRequest
             'password',
         );
 
-        return [
+        // Start with the required data.
+        $data = [
             'userName' => $this->getUserName(),
             'password' => $this->getPassword(),
             // NOTE: Yes, the amount is in cents which differs from the iframe configuration,
@@ -32,6 +36,20 @@ class CaptureRequest extends AbstractRequest
             'txnId' => $this->getTransactionReference(),
             'txnType' => self::TXN_TYPE_CAPTURE,
         ];
+
+        // Filter optional data.
+        $optionalData = array_filter([
+            'channel' => $this->getChannel(),
+            'gatewaySettingId' => $this->getGatewaySettingId(),
+            'dynamicDescriptor' => $this->getDynamicDescriptor(),
+            // TODO: Confirm the `allowArbitraryCapture` parameter accepts `0` and `1` as `http_build_query()` would send them.
+            'allowArbitraryCapture' => $this->getAllowArbitraryCapture(),
+        ], fn ($item) => (!is_null($item) && $item !== ''));
+
+        // Add metadata.
+        $metadata = $this->getMetadata();
+
+        return array_merge($data, $optionalData, $metadata);
     }
 
     /**
