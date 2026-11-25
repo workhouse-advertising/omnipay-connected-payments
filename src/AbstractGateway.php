@@ -35,4 +35,43 @@ abstract class AbstractGateway extends AbstractGatewayBase
         /** @var \Omnipay\ConnectedPayments\Message\Notifications\GetNotificationsRequest $request */
         return $request;
     }
+
+    /**
+     * Create a notification.
+     *
+     * @param array $options
+     * @return \Omnipay\ConnectedPayments\Message\Notifications\CreateNotificationRequest
+     */
+    public function createNotification(array $options = [])
+    {
+        $request = $this->createRequest(\Omnipay\ConnectedPayments\Message\Notifications\CreateNotificationRequest::class, $options);
+        /** @var \Omnipay\ConnectedPayments\Message\Notifications\CreateNotificationRequest $request */
+        return $request;
+    }
+
+    /**
+     * Update a notification.
+     *
+     * @param array $options
+     * @return \Omnipay\ConnectedPayments\Message\Notifications\UpdateNotificationRequest
+     */
+    public function updateNotification(array $options = [])
+    {
+        $request = $this->createRequest(\Omnipay\ConnectedPayments\Message\Notifications\UpdateNotificationRequest::class, $options);
+        /** @var \Omnipay\ConnectedPayments\Message\Notifications\UpdateNotificationRequest $request */
+        return $request;
+    }
+
+    /**
+     * Delete a notification.
+     *
+     * @param array $options
+     * @return \Omnipay\ConnectedPayments\Message\Notifications\DeleteNotificationRequest
+     */
+    public function deleteNotification(array $options = [])
+    {
+        $request = $this->createRequest(\Omnipay\ConnectedPayments\Message\Notifications\DeleteNotificationRequest::class, $options);
+        /** @var \Omnipay\ConnectedPayments\Message\Notifications\DeleteNotificationRequest $request */
+        return $request;
+    }
 }
