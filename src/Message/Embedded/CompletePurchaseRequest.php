@@ -20,6 +20,9 @@ class CompletePurchaseRequest extends AbstractRequest
         return [
             'userName' => $this->getUserName(),
             'password' => $this->getPassword(),
+            // NOTE: Need to set `startEventTime` to `0` otherwise
+            //        the defaults filter only to the current day.
+            'startEventTime' => 0,
             'filterCriteria' => [
                 'merchantReference' => [
                     'operator' => 'EQ',
