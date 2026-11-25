@@ -27,7 +27,7 @@ class CreateNotificationRequest extends AbstractRequest
             'enabled' => $this->getEnabled() ?? true,
             // TODO: Consider a good default for max attempts.
             'maxAttempt' => $this->getMaxAttempt() ?? 10,
-            'payment' => $this->getPayment(),
+            'payment' => $this->getPayment() ?? ['fields' => ['merchReference']],
             // TODO: Consider default value for `type`.
             'type' => $this->getType() ?? 'PFR',
         ];
