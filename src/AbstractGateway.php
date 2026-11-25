@@ -22,4 +22,17 @@ abstract class AbstractGateway extends AbstractGatewayBase
             'testMode' => false,
         ];
     }
+
+    /**
+     * Get notifications.
+     *
+     * @param array $options
+     * @return \Omnipay\ConnectedPayments\Message\Notifications\GetNotificationsRequest
+     */
+    public function notifications(array $options = [])
+    {
+        $request = $this->createRequest(\Omnipay\ConnectedPayments\Message\Notifications\GetNotificationsRequest::class, $options);
+        /** @var \Omnipay\ConnectedPayments\Message\Notifications\GetNotificationsRequest $request */
+        return $request;
+    }
 }
