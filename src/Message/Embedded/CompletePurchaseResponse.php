@@ -2,6 +2,7 @@
 
 namespace Omnipay\ConnectedPayments\Message\Embedded;
 
+use Omnipay\ConnectedPayments\Message\AbstractRequest;
 use Omnipay\ConnectedPayments\Message\AbstractResponse;
 
 class CompletePurchaseResponse extends AbstractResponse
@@ -29,6 +30,26 @@ class CompletePurchaseResponse extends AbstractResponse
     public function getTransactionReference()
     {
         return $this->getTransaction()['transactionId'] ?? null;
+    }
+
+    /**
+     * Get the transaction type.
+     *
+     * @return string|null
+     */
+    public function getTransactionType()
+    {
+        return $this->getTxnType();
+    }
+
+    /**
+     * Get the value for `txnType`.
+     *
+     * @return string|null
+     */
+    public function getTxnType()
+    {
+        return $this->getTransaction()['txnType'] ?? null;
     }
 
     /**
@@ -88,11 +109,13 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function requiresCapture(): bool
     {
+        // TODO: Confirm that transaction type filtering is fine like this.
         // TODO: Check and confirm which method we should use for whether or not this transaction
         //       still requires capture or not.
         //       Will we ever have to deal with partial captures at all?
-        return !$this->alreadyCaptured();
-        // return !$this->alreadyPartiallyCaptured();
+        return $this->getTxnType() == AbstractRequest::TXN_TYPE_PRE_AUTH
+            && !$this->alreadyCaptured();
+            // && !$this->alreadyPartiallyCaptured();
     }
 
     /**
