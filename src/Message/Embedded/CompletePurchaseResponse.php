@@ -19,6 +19,15 @@ class CompletePurchaseResponse extends AbstractResponse
     /**
      * @inheritDoc
      */
+    public function getMessage()
+    {
+        $responseCode = $this->getResponseCode();
+        return $responseCode ? $this->getMessageForResponseCode($responseCode) : null;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getResponseCode()
     {
         return $this->getTransaction()['responseCode'] ?? null;

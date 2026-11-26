@@ -46,7 +46,7 @@ class CaptureResponse extends AbstractResponse
      */
     public function getMessage()
     {
-        // TODO: Confirm whether or not these messages are suitable for public display.
-        return $this->getTransaction()['message'] ?? null;
+        $responseCode = $this->getResponseCode();
+        return $responseCode ? $this->getMessageForResponseCode($responseCode) : null;
     }
 }

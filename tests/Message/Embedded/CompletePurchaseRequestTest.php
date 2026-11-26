@@ -42,6 +42,7 @@ class CompletePurchaseRequestTest extends AbstractMessageTestCase
         $expected = [
             'userName' => $this->request->getUserName(),
             'password' => $this->request->getPassword(),
+            'startEventTime' => 0,
             'filterCriteria' => [
                 'merchantReference' => [
                     'operator' => 'EQ',

@@ -9,6 +9,15 @@ class AbstractMessageTestCase extends TestCase
     /**
      * @inheritDoc
      */
+    public function tearDown() : void
+    {
+        \Omnipay\ConnectedPayments\Message\AbstractResponse::resetMessageMapping();
+        parent::tearDown();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getValidCard()
     {
         return [

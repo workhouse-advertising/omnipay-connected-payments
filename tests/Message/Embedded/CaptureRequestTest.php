@@ -110,6 +110,25 @@ class CaptureRequestTest extends AbstractMessageTestCase
     }
 
     /**
+     * Test a failed request with custom messages.
+     */
+    public function testSendFailureWithCustomMessages()
+    {
+        \Omnipay\ConnectedPayments\Message\AbstractResponse::setMessageMapping([
+            '713' => 'Some custom error message',
+        ]);
+        $this->setMockHttpResponse('CaptureFailure.txt');
+
+        /** @var \Omnipay\Common\Message\AbstractResponse $response */
+        $response = $this->request->send();
+        $this->assertFalse($response->isPending());
+        $this->assertFalse($response->isSuccessful());
+        $this->assertFalse($response->isRedirect());
+        $this->assertSame('713', $response->getResponseCode()); // @phpstan-ignore method.notFound
+        $this->assertSame('Some custom error message', $response->getMessage());
+    }
+
+    /**
      * Test a failed request.
      */
     public function testSendFailure()
@@ -121,6 +140,7 @@ class CaptureRequestTest extends AbstractMessageTestCase
         $this->assertFalse($response->isPending());
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
-        $this->assertSame('The transaction request is invalid and cannot be processed', $response->getMessage());
+        $this->assertSame('713', $response->getResponseCode()); // @phpstan-ignore method.notFound
+        $this->assertSame('There was a problem with your transaction. Please try again later.', $response->getMessage());
     }
 }
